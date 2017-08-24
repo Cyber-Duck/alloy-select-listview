@@ -1,5 +1,11 @@
 ## Alloy ListItem Selection Re-usable Widget (with "Other" optional support)
 
+### Get it [![gitTio](http://gitt.io/badge.svg)](http://gitt.io/component/uk.co.cyber-duck.select)
+
+Download this repository and consult the [Alloy Documentation](http://docs.appcelerator.com/titanium/latest/#!/guide/Alloy_XML_Markup-section-35621528_AlloyXMLMarkup-ImportingWidgets) on how to install it, or simply use the [gitTio CLI](http://gitt.io/cli):
+
+`$ gittio install uk.co.cyber-duck.select`
+
 This is a Axway Titanium Alloy Widget wrapping some standard components in order
 to create a re-usable Widget for a single choice selection within a ListView with
 a support for a "Other" entry.
@@ -13,12 +19,6 @@ At the moment we only support a single selection mode but we could work on a mul
 selection mode in the future.
 
 ![screencast](https://cdn-pro.droplr.net/files/acc_244709/qacXm2)
-
-### Get it [![gitTio](http://gitt.io/badge.svg)](http://gitt.io/component/uk.co.cyber-duck.select)
-
-Download this repository and consult the [Alloy Documentation](http://docs.appcelerator.com/titanium/latest/#!/guide/Alloy_XML_Markup-section-35621528_AlloyXMLMarkup-ImportingWidgets) on how to install it, or simply use the [gitTio CLI](http://gitt.io/cli):
-
-`$ gittio install uk.co.cyber-duck.select`
 
 ## Alloy implementation
 
