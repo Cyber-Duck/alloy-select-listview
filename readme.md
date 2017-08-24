@@ -14,6 +14,12 @@ selection mode in the future.
 
 ![screencast](https://cdn-pro.droplr.net/files/acc_244709/qacXm2)
 
+### Get it [![gitTio](http://gitt.io/badge.svg)](http://gitt.io/component/uk.co.cyber-duck.select)
+
+Download this repository and consult the [Alloy Documentation](http://docs.appcelerator.com/titanium/latest/#!/guide/Alloy_XML_Markup-section-35621528_AlloyXMLMarkup-ImportingWidgets) on how to install it, or simply use the [gitTio CLI](http://gitt.io/cli):
+
+`$ gittio install uk.co.cyber-duck.select`
+
 ## Alloy implementation
 
 ```xml
