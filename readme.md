@@ -1,4 +1,4 @@
-# Alloy ListItem Selection Re-usable Widget (with "Other" option support)
+## Alloy ListItem Selection Re-usable Widget (with "Other" optional support)
 
 This is a Axway Titanium Alloy Widget wrapping some standard components in order
 to create a re-usable Widget for a single choice selection within a ListView with
