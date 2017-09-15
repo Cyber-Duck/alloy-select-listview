@@ -24,7 +24,7 @@ Download this repository and consult the [Alloy Documentation](http://docs.appce
 $ gittio install uk.co.cyber-duck.select
 ```
 
-## Demo
+## Demo
 
 ![screencast](https://cdn-pro.droplr.net/files/acc_244709/qacXm2)
 
