@@ -1,7 +1,13 @@
 <Alloy>
-    <ListView id="listview" allowsSelection="true" height="Ti.UI.SIZE">
-        <ListSection id="section">
-            <ListItem id="other" if="$.args.hasOther" title="Other" accessoryType="Ti.UI.LIST_ACCESSORY_TYPE_NONE" template="Ti.UI.LIST_ITEM_TEMPLATE_SETTINGS" />
-        </ListSection>
-    </ListView>
+    <View layout="vertical" height="Ti.UI.SIZE">
+        <Label id="caption" if="$.args.caption" class="uk-co-cyber-duck-select-caption" autoLayout="true" width="Ti.UI.FILL" height="Ti.UI.SIZE" />
+        <ListView id="listview" allowsSelection="true" height="Ti.UI.SIZE">
+            <ListSection id="section">
+                <ListItem id="other" if="$.args.hasOther" title="Other" accessoryType="Ti.UI.LIST_ACCESSORY_TYPE_NONE" template="Ti.UI.LIST_ITEM_TEMPLATE_SETTINGS" />
+            </ListSection>
+        </ListView>
+        <View id="errorwrapper" class="uk-co-cyber-duck-select-error-wrapper" width="Ti.UI.FILL" height="0">
+            <Label id="error" class="uk-co-cyber-duck-select-error" width="Ti.UI.FILL" />
+        </View>
+    </View>
 </Alloy>
