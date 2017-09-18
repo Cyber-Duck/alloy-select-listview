@@ -1,0 +1,23 @@
+".uk-co-cyber-duck-select-caption": {
+    width: Ti.UI.FILL,
+    height: Ti.UI.SIZE,
+    font: {
+        fontSize: 14,
+        fontWeight: "bold"
+    },
+    color: "#000",
+}
+".uk-co-cyber-duck-select-caption-error": {
+    font: {
+        fontSize: 14,
+        fontWeight: "bold"
+    },
+    color: "#F00",
+}
+".uk-co-cyber-duck-select-error": {
+    font: {
+        fontSize: 12,
+        fontWeight: "normal"
+    },
+    color: "#F00",
+}

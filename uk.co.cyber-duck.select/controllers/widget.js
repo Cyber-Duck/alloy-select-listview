@@ -1,7 +1,6 @@
-var args = $.args,
-    options = args.options || false,
-    hasOther = args.hasOther || false,
-    otherTitle = args.otherTitle || false,
+// $.args;
+var hasOther = $.args.hasOther || false,
+    otherTitle = $.args.otherTitle || false,
     selectedOption = null,
     value = null,
     otherValue = null;
@@ -171,8 +170,8 @@ $.listview.addEventListener("itemclick", function optionSelected(e) {
 
 // Init of the Widget
 (function init() {
-    if (options && _.isString(options)) {
-        $.setOptions(options);
+    if ($.args.options && _.isString($.args.options)) {
+        $.setOptions($.args.options);
     }
     if (hasOther && otherTitle) {
         $.setOtherTitle(otherTitle);

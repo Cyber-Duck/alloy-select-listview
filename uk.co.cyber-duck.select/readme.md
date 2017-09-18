@@ -8,7 +8,7 @@ This is a Axway Titanium Alloy Widget wrapping some standard components in order
 to create a re-usable Widget for a single choice selection within a ListView with
 a support for a "Other" entry.
 
-Here we are using one Ti.UI.ListView, one Ti.UI.ListSection and multiple Ti.UI.ListItems.
+Here we are using one `Ti.UI.ListView`, one `Ti.UI.ListSection` and multiple `Ti.UI.ListItems`.
 
 We've tried to make the API as simple and intuitive as possible but we're opened for
 pull requests too.
@@ -52,24 +52,60 @@ $.myelement.setOtherTitle("Another thing");
 </Alloy>
 ```
 
+or using only JS:
+
+```js
+var myelement = Alloy.createWidget("uk.co.cyber-duck.select", "myelement", {
+    options: "Foo|Bar|Lorem|Ipsum",
+    onOptionSelected: function (e) { // ... },
+    hasOther: true|false,
+    otherTitle: "Another thing",
+    onOtherSelected: function (e) { // ... }
+});
+```
+
+## Instanciation
+
+Upon instanciation, fro either the Alloy Controller (Javascript) or the Alloy View (XML), a couple of arguments can be accepted:
+
+* `options` - `Mixed` - default: empty
+* `hasOther` - `Boolean` - **optional** default: `false` -- Are you going to have a "Other" possible value selected?
+* `otherTitle` - `String` - **optional** -- Only valid if `hasOther` is set to `true`.
+* `caption` - `String` - **optional** -- Do you want a `<Label>` element renedered before the element so you can illustrate what you're asking for?
+
 ## Public Methods
 
 ### Setters
 
 * `$.myelement.setOptions(options: Array<String>)`
+    * `options` can be of **three** different forms:
+        * `String`: example `"Foo|Bar|Lorem|Ipsum"`
+        * `Array<String>`: example `["Foo", "Bar", "Lorem", "Ipsum"]`
+    * **Important:** Similar to a HTML `<select>` element, please be aware that you can even specify a `key:value` pair for each option by using the following syntax from both the Alloy Controller (Javascript) or the Alloy View (XML):
+        * `String`: example `"foo_key:Foo|bar_key:Bar|lorem_key:Lorem|ipsum_key:Ipsum"`
+        * `Array<String>`: example `["foo_key:Foo", "bar_key:Bar", "lorem_key:Lorem", "ipsum_key:Ipsum"]`
+        * `Array<Object>`: example `[{"foo_key": "Foo"}, {"bar_key": "Bar"}, {"lorem_key": "Lorem"}, {"ipsum_key": "Ipsum"}]`
 * `$.myelement.setOtherTitle(title: String)`
 * `$.myelement.setOtherSubtitle(subtitle: String)`
 
 ### Getters
 
-* `$.myelement.getValue()`
+* `$.myelement.getValue()` -- If no specific `key` is given for the options, the actual title string value will be returned as the key too.
 * `$.myelement.getOtherValue()`
 * `$.myelement.getSelectedOption()`
+* `$.myelement.getOptionsLength()`
 
 ### Widget Functions
 
 * `$.myelement.selectOptionAtIndex(index: Integer)`
+    * Select an option and add a tick symbol next to it.
 * `$.myelement.unselectAllOptions()`
+* `$.myelement.insertOption(optionTitle: String, optionKey: String - optional)`
+    * Inserts a new option at the end of the element.
+    * If `optionKey` is not given, we'll fall back to using the `optionTitle` as the key by default.
+* `$.myelement.removeLastOption()`
+* `$.myelement.showError(message: String)` -- Renders a styled error message underneath the element of called with an error message to display.
+* `$.myelement.hideError()` -- Hides any previously rendered error messages.
 
 ## Public Events
 
@@ -112,6 +148,14 @@ Added context variables from our Widget:
 
 * `e.otherTitle` --> String
 * `e.otherSubtitle` --> String
+
+## TSS Styling
+
+This is following the best practises in terms of widget styling from [the official documentation](https://docs.appcelerator.com/platform/latest/#!/guide/Alloy_Widgets).
+
+You can overriding any TSS class by creating the following file `app/themes/[your_theme_name]/widgets/uk.co.cyber-duck.select/styles/widget.tss`.
+
+Once that file created, feel free to pick and choose from our classes within the original [`widget.tss`](https://github.com/Cyber-Duck/alloy-select-listview/blob/master/uk.co.cyber-duck.select/styles/widget.tss) file.
 
 ## Bonus
 
