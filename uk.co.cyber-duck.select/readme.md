@@ -35,15 +35,16 @@ $ gittio install uk.co.cyber-duck.select
     <Widget id="myelement" src="uk.co.cyber-duck.select"
         options="Foo|Bar|Lorem|Ipsum"
         onOptionSelected="myOptionSelectedHandler"
-        hasOther="true|false" otherTitle="Another thing" onOtherSelected="myOtherSelectedHandler" />
+        hasOther="true|false" otherTitle="Another thing" otherDefaultValue="another-thing" onOtherSelected="myOtherSelectedHandler" />
 </Alloy>
 ```
 
-`hasOther` has to be defined upon Widget instanciation but `options` and `otherTitle` can be defined at both XML View level or JS Controller level:
+`hasOther` has to be defined upon Widget instanciation but `options` and `otherTitle`, `otherDefaultValue` can be defined at both XML View level or JS Controller level:
 
 ```js
 $.myelement.setOptions(["Foo","Bar","Lorem","Ipsum"]);
 $.myelement.setOtherTitle("Another thing");
+$.myelement.setOtherDefaultValue("another-thing");
 ```
 
 ```xml
@@ -70,8 +71,9 @@ Upon instanciation, fro either the Alloy Controller (Javascript) or the Alloy Vi
 
 * `options` - `Mixed` - default: empty
 * `hasOther` - `Boolean` - **optional** default: `false` -- Are you going to have a "Other" possible value selected?
-* `otherTitle` - `String` - **optional** -- Only valid if `hasOther` is set to `true`.
-* `caption` - `String` - **optional** -- Do you want a `<Label>` element renedered before the element so you can illustrate what you're asking for?
+* `otherTitle` - `String` - **optional** -- Only valid if `hasOther` is set to `true`. Default value is `Other`. This is the title of the "Other" option.
+* `otherDefaultValue` - `String` - **optional** -- Only valid if `hasOther` is set to `true`. Default value is `Other`. This is the value returned when you call `getValue()` when the "Other" option is selected.
+* `caption` - `String` - **optional** -- Do you want a `<Label>` element rendered before the element so you can illustrate what you're asking for?
 
 ## Public Methods
 

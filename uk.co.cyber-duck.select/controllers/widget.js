@@ -1,9 +1,7 @@
 // $.args;
 var hasOther = $.args.hasOther || false,
-    otherTitle = $.args.otherTitle || false,
     selectedOption = null,
-    value = null,
-    otherValue = null;
+    value = null;
 
 // Getters
 $.getValue = function () {
@@ -74,6 +72,18 @@ $.setOtherTitle = function (title) {
     var otherItemIndex = $.section.getItems().length - 1;
 
     otherItem.properties.title = title;
+    $.section.updateItemAt(otherItemIndex, otherItem);
+};
+$.setOtherDefaultValue = function (defaultValue) {
+    if (!hasOther) {
+        console.error("Unable to call setOtherDefaultValue() when the Widget doesn't have 'hasOther' set to 'true'.");
+        return;
+    }
+
+    var otherItem = _.last($.section.getItems());
+    var otherItemIndex = $.section.getItems().length - 1;
+
+    $.other.properties.itemId = otherItem.properties.itemId = defaultValue;
     $.section.updateItemAt(otherItemIndex, otherItem);
 };
 $.setOtherSubtitle = function(subtitle) {
@@ -174,10 +184,15 @@ $.listview.addEventListener("itemclick", function (e) {
     if ($.args.options && _.isString($.args.options)) {
         $.setOptions($.args.options);
     }
-    if (hasOther && otherTitle) {
-        $.setOtherTitle(otherTitle);
-    }
     if ($.args.caption) {
         $.caption.setText($.args.caption);
+    }
+    if (hasOther) {
+        if ($.args.otherTitle) {
+            $.setOtherTitle($.args.otherTitle);
+        }
+        if ($.args.otherDefaultValue) {
+            $.setOtherDefaultValue($.args.otherDefaultValue);
+        }
     }
 })();
