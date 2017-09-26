@@ -60,7 +60,7 @@ $.setOptions = function (options) {
         dataItems.push({ "properties": listItem.properties });
     });
 
-    $.section.setItems(dataItems);
+    $.section.insertItemsAt(0, dataItems);
     // Every time we redefine the set of options again, the selection should be lost
     $.unselectAllOptions();
 };
@@ -120,6 +120,12 @@ $.selectOptionAtIndex = function (selectedIndex, context) {
         item.properties.subtitle = "";
         $.section.updateItemAt(itemIndex, item);
     });
+
+    if (hasOther && value === $.other.properties.itemId) {
+        context.otherTitle = $.other.properties.title;
+        context.otherSubtitle = $.other.properties.subtitle;
+        $.trigger("otherSelected", context);
+    }
 };
 $.unselectAllOptions = function () {
     value = null;
@@ -155,13 +161,8 @@ $.hideError = function () {
 };
 
 // Private Event Listener
-$.listview.addEventListener("itemclick", function optionSelected(e) {
+$.listview.addEventListener("itemclick", function (e) {
     $.selectOptionAtIndex(e.itemIndex, e);
-    if (hasOther && value === $.other.properties.title) {
-        e.otherTitle = $.other.properties.title;
-        e.otherSubtitle = $.other.properties.subtitle;
-        $.trigger("otherSelected", e);
-    }
 });
 
 // Public Event Listeners
