@@ -58,9 +58,12 @@ $.setOptions = function (options) {
         dataItems.push({ "properties": listItem.properties });
     });
 
-    $.section.insertItemsAt(0, dataItems);
     // Every time we redefine the set of options again, the selection should be lost
     $.unselectAllOptions();
+    // Empty items
+    $.section.setItems([]);
+    // Insert new set
+    $.section.insertItemsAt(0, dataItems);
 };
 $.setOtherTitle = function (title) {
     if (!hasOther) {
