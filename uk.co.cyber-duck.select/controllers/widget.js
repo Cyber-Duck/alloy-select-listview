@@ -20,7 +20,8 @@ $.getOptionsLength = function () {
 
 // Setters
 $.setOptions = function (options) {
-    var optionsArr = dataItems = [];
+    var optionsArr = [],
+        dataItems = [];
 
     if (_.isString(options)) {
         optionsArr = options.split("|");
@@ -33,7 +34,8 @@ $.setOptions = function (options) {
 
     optionsArr = _.map(optionsArr, function (option) {
         if (_.isString(option)) {
-            var key, value, object = {};
+            var key, value,
+                object = {};
             if (option.indexOf(":") >= 0) {
                 key = _.first(option.split(":"));
                 value = _.last(option.split(":"));
@@ -60,19 +62,31 @@ $.setOptions = function (options) {
 
     // Every time we redefine the set of options again, the selection should be lost
     $.unselectAllOptions();
-    // Empty items
-    $.section.setItems([]);
+
+    if (hasOther) {
+        // Remove user-defined items (not the "Other" one)
+        _.each($.section.getItems(), function(item, itemIndex) {
+            var otherItemIndex = $.getOptionsLength() - 1;
+            if (itemIndex !== otherItemIndex) {
+                return $.section.deleteItemsAt(otherItemIndex, 1);
+            }
+        });
+    } else {
+        // Remove all items
+        $.section.setItems([]);
+    }
+
     // Insert new set
     $.section.insertItemsAt(0, dataItems);
 };
 $.setOtherTitle = function (title) {
     if (!hasOther) {
-        console.error("Unable to call setOtherSubtitle() when the Widget doesn't have 'hasOther' set to 'true'.");
+        console.error("Unable to call setOtherTitle() when the Widget doesn't have 'hasOther' set to 'true'.");
         return;
     }
 
     var otherItem = _.last($.section.getItems());
-    var otherItemIndex = $.section.getItems().length - 1;
+    var otherItemIndex = $.getOptionsLength() - 1;
 
     otherItem.properties.title = title;
     $.section.updateItemAt(otherItemIndex, otherItem);
@@ -84,7 +98,7 @@ $.setOtherDefaultValue = function (defaultValue) {
     }
 
     var otherItem = _.last($.section.getItems());
-    var otherItemIndex = $.section.getItems().length - 1;
+    var otherItemIndex = $.getOptionsLength() - 1;
 
     $.other.properties.itemId = otherItem.properties.itemId = defaultValue;
     $.section.updateItemAt(otherItemIndex, otherItem);
@@ -96,7 +110,7 @@ $.setOtherSubtitle = function(subtitle) {
     }
 
     var otherItem = _.last($.section.getItems());
-    var otherItemIndex = $.section.getItems().length - 1;
+    var otherItemIndex = $.getOptionsLength() - 1;
 
     otherItem.properties.subtitle = subtitle;
     if (subtitle) {
@@ -125,10 +139,8 @@ $.selectOptionAtIndex = function (selectedIndex, context) {
             if (item.properties.accessoryType === Ti.UI.LIST_ACCESSORY_TYPE_NONE) {
                 item.properties.accessoryType = Ti.UI.LIST_ACCESSORY_TYPE_CHECKMARK;
             }
-        } else {
-            if (item.properties.accessoryType === Ti.UI.LIST_ACCESSORY_TYPE_CHECKMARK) {
-                item.properties.accessoryType = Ti.UI.LIST_ACCESSORY_TYPE_NONE;
-            }
+        } else if (item.properties.accessoryType === Ti.UI.LIST_ACCESSORY_TYPE_CHECKMARK) {
+            item.properties.accessoryType = Ti.UI.LIST_ACCESSORY_TYPE_NONE;
         }
         item.properties.subtitle = "";
         $.section.updateItemAt(itemIndex, item);
@@ -162,16 +174,19 @@ $.removeLastOption = function () {
     $.section.setItems($.section.getItems().pop());
 };
 $.showError = function (message) {
-    $.resetClass($.caption, 'uk-co-cyber-duck-select-caption-error');
+    $.resetClass($.caption, "uk-co-cyber-duck-select-caption-error");
     if (message) {
         $.errorwrapper.setHeight(Ti.UI.SIZE);
         $.error.setText(message);
     }
 };
 $.hideError = function () {
-    $.resetClass($.caption, 'uk-co-cyber-duck-select-caption');
+    $.resetClass($.caption, "uk-co-cyber-duck-select-caption");
     $.errorwrapper.setHeight(0);
 };
+
+// Private methods
+// code goes here...
 
 // Private Event Listener
 $.listview.addEventListener("itemclick", function (e) {
